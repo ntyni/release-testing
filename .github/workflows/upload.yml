@@ -27,7 +27,7 @@ jobs:
           draft: false
           prerelease: false
       - name: Upload a.txt as user-data
-        id: upload-release-asset 
+        id: upload-user-data
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,7 +37,7 @@ jobs:
           asset_name: user-data
           asset_content_type: text/plain
       - name: Upload b.txt as meta-data
-        id: upload-release-asset 
+        id: upload-meta-data
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
