@@ -26,23 +26,23 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-      - name: Upload a.txt as user-data
+      - name: Upload user-data
         id: upload-user-data
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./a.txt
+          asset_path: ./user-data
           asset_name: user-data
           asset_content_type: text/plain
-      - name: Upload b.txt as meta-data
+      - name: Upload meta-data
         id: upload-meta-data
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./b.txt
+          asset_path: ./meta-data
           asset_name: meta-data
           asset_content_type: text/plain
