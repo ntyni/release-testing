@@ -15,5 +15,5 @@ jobs:
             SKEY: ${{ secrets.SIGNING_KEY }}
         run: |
             echo $SKEY | wc
-            echo $SKEY | gpg --import
+            echo $SKEY | base64 -d | gpg --import
             for f in debs/*.deb; do reprepro -b docs/reprepro includedeb foo $f; done
