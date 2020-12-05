@@ -1,12 +1,15 @@
-name: test build
+name: test repo build
 on: [ push ]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Install prerequisite packages
+        run: |
+            sudo apt -y install reprepro gnupg
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Build project # Nothing to do for now
+      - name: Build repository
         run: |
-            sudo apt install mkisofs
-            echo Done
+            echo $SIGNING_KEY | gpg --import
+            for f in debs/*.deb; do reprepro -b docs/reprepro includedeb foo $f; done

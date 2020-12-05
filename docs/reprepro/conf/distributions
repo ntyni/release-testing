@@ -1,0 +1,10 @@
+Origin: ntyni
+Label: Test-Repo
+Suite: foo
+Codename: bar
+Architectures: amd64 source
+Components: main 
+Description: testing repo
+SignWith: 0x80F31B0E7BCFD85A
+AlsoAcceptFor: UNRELEASED
+# NotAutomatic: yes
