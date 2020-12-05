@@ -10,8 +10,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build repository
+        shell: bash
         env:
-            SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+            SKEY: ${{ secrets.SIGNING_KEY }}
         run: |
-            echo $SIGNING_KEY | gpg --import
+            echo $SKEY | wc
+            echo $SKEY | gpg --import
             for f in debs/*.deb; do reprepro -b docs/reprepro includedeb foo $f; done
