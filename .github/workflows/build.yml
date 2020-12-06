@@ -18,4 +18,5 @@ jobs:
             SKEY: ${{ secrets.SIGNING_KEY }}
         run: |
             echo "$SKEY" | gpg --import
-            for f in debs/*.deb ytl-linux-customize/*.deb; do echo $f; reprepro -b docs/reprepro includedeb foo $f; done
+            for dir in debs/ ytl-linux-customize/; do [ -d $dir ] || mkdir $dir; done
+            find debs/ ytl-linux-customize/ -name '*.deb' | while read deb; do echo $deb; reprepro -b docs/reprepro includedeb foo $deb; done
