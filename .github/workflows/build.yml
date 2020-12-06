@@ -6,13 +6,16 @@ jobs:
     steps:
       - name: Install prerequisite packages
         run: |
-            sudo apt -y install reprepro gnupg
+            sudo apt -y install reprepro gnupg ruby ruby-dev rubygems build-essential
+            sudo gem install --no-document fpm
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Build deb packages
+        run: |
+            make -C ytl-linux-customize deb
       - name: Build repository
         env:
             SKEY: ${{ secrets.SIGNING_KEY }}
         run: |
-            echo "$SKEY" | wc
             echo "$SKEY" | gpg --import
-            for f in debs/*.deb; do echo $f; reprepro -b docs/reprepro includedeb foo $f; done
+            for f in debs/*.deb ytl-linux-customize/*.deb; do echo $f; reprepro -b docs/reprepro includedeb foo $f; done
